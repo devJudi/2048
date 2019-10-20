@@ -1,12 +1,22 @@
 #include <iostream>
+#include <vector>
 #include "MainWindow.h"
 #include "TileField.h"
+#include "Tiles.h"
 
 using namespace std;
+
+int numberOfTiles = 0;
+
+sf::Font fontPixel;
 
 int main()
 {
     MainWindow window(600, 700, "2048:re");
+
+    unsigned int currentTilesValues[16] = {0};
+
+    std::vector <Tiles> tiles;
 
     TileField tileFields[16];
     for(int i = 0; i<16; i++)
@@ -23,7 +33,7 @@ int main()
     while(window.isOpen())
     {
         sf::Event event;
-        window.handleEvent(event);
+        window.handleEvent(event, currentTilesValues, tiles);
 
         window.clear(sf::Color(255, 255, 220, 0));
         for(int i = 0; i<16; i++)
@@ -31,6 +41,13 @@ int main()
             window.draw(tileFields[i]);
         }
         window.draw(scoreField);
+        for(int i = numberOfTiles; i>0; i--)
+        {
+            tiles[numberOfTiles].setPosition(200, 200);
+            tiles[numberOfTiles].setFont(fontPixel);
+            tiles[numberOfTiles].setString("test");
+            window.draw(tiles[numberOfTiles]);
+        }
         window.display();
     }
     return 0;
