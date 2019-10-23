@@ -5,7 +5,8 @@ MainWindow::MainWindow(int x, int y, std::string name)
     this->create(sf::VideoMode(x, y), name);
 }
 
-void MainWindow::handleEvent(sf::Event event, unsigned int values[16], std::vector <Tiles> tiles)
+void MainWindow::handleEvent(sf::Event event, unsigned int values[16],
+                             std::vector <Tiles> &tiles, std::vector <sf::Text> &tilesText)
 {
     srand(time(NULL));
 
@@ -33,7 +34,12 @@ void MainWindow::handleEvent(sf::Event event, unsigned int values[16], std::vect
                 int random = rand()%16;
                 if(isEmpty[random])
                 {
-                    tiles.push_back(Tiles(2, random));
+                    tiles.push_back(Tiles(0, 0));
+                    tiles[numberOfTiles].value = 2;
+                    tiles[numberOfTiles].position = random;
+
+                    tilesText.push_back(sf::Text("0", fontPixel));
+
                     isEmpty[random]=true;
 
                     numberOfTiles++;

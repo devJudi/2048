@@ -3,6 +3,7 @@
 #include "MainWindow.h"
 #include "TileField.h"
 #include "Tiles.h"
+#include "Resources.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ int main()
     unsigned int currentTilesValues[16] = {0};
 
     std::vector <Tiles> tiles;
+    std::vector <sf::Text> tilesText;
 
     TileField tileFields[16];
     for(int i = 0; i<16; i++)
@@ -33,7 +35,7 @@ int main()
     while(window.isOpen())
     {
         sf::Event event;
-        window.handleEvent(event, currentTilesValues, tiles);
+        window.handleEvent(event, currentTilesValues, tiles, tilesText);
 
         window.clear(sf::Color(255, 255, 220, 0));
         for(int i = 0; i<16; i++)
@@ -43,10 +45,8 @@ int main()
         window.draw(scoreField);
         for(int i = numberOfTiles; i>0; i--)
         {
-            tiles[numberOfTiles].setPosition(200, 200);
-            tiles[numberOfTiles].setFont(fontPixel);
-            tiles[numberOfTiles].setString("test");
-            window.draw(tiles[numberOfTiles]);
+            tiles[numberOfTiles-1].updateTile(tilesText[numberOfTiles-1]);
+            window.draw(tilesText[numberOfTiles-1]);
         }
         window.display();
     }

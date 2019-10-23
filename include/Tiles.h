@@ -7,11 +7,14 @@
 
 extern sf::Font fontPixel;
 
-class Tiles : public sf::Text
+class Tiles
 {
     public:
         Tiles(unsigned int val, int pos);
         virtual ~Tiles();
+        void updateTile(sf::Text &text);
+
+        std::string getSmile() {return ":)";}
 
         unsigned int value;
         int position;
