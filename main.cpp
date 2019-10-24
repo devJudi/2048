@@ -2,7 +2,7 @@
 #include <vector>
 #include "MainWindow.h"
 #include "TileField.h"
-#include "Tiles.h"
+#include "Tile.h"
 #include "Resources.h"
 
 using namespace std;
@@ -13,12 +13,20 @@ sf::Font fontPixel;
 
 int main()
 {
+    srand(time(NULL));
+
     MainWindow window(600, 700, "2048:re");
 
     unsigned int currentTilesValues[16] = {0};
 
-    std::vector <Tiles> tiles;
-    std::vector <sf::Text> tilesText;
+    bool isEmpty[16];
+    for(int i = 0; i<16; i++)
+    {
+        isEmpty[i] = true;
+    }
+
+    std::vector <Tile> tiles;
+    Resources::loadFonts();
 
     TileField tileFields[16];
     for(int i = 0; i<16; i++)
@@ -35,7 +43,7 @@ int main()
     while(window.isOpen())
     {
         sf::Event event;
-        window.handleEvent(event, currentTilesValues, tiles, tilesText);
+        window.handleEvent(event, currentTilesValues, tiles, isEmpty);
 
         window.clear(sf::Color(255, 255, 220, 0));
         for(int i = 0; i<16; i++)
@@ -45,8 +53,8 @@ int main()
         window.draw(scoreField);
         for(int i = numberOfTiles; i>0; i--)
         {
-            tiles[numberOfTiles-1].updateTile(tilesText[numberOfTiles-1]);
-            window.draw(tilesText[numberOfTiles-1]);
+            window.draw(tiles[i-1]);
+            window.draw(tiles[i-1].textValue);
         }
         window.display();
     }

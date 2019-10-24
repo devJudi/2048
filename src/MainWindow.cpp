@@ -5,11 +5,8 @@ MainWindow::MainWindow(int x, int y, std::string name)
     this->create(sf::VideoMode(x, y), name);
 }
 
-void MainWindow::handleEvent(sf::Event event, unsigned int values[16],
-                             std::vector <Tiles> &tiles, std::vector <sf::Text> &tilesText)
+void MainWindow::handleEvent(sf::Event event, unsigned int values[16], std::vector <Tile> &tiles, bool isEmpty[16])
 {
-    srand(time(NULL));
-
     while(this->pollEvent(event))
     {
         if(event.type==sf::Event::Closed)
@@ -24,25 +21,20 @@ void MainWindow::handleEvent(sf::Event event, unsigned int values[16],
             }
             else if(event.key.code==sf::Keyboard::W)
             {
-                bool isEmpty[16];
-                for(int i = 0; i<16; i++)
-                {
-                    if(values[i] == 0) isEmpty[i]=true;
-                    else isEmpty[i] = false;
-                }
-
                 int random = rand()%16;
+                std::cout<<"Random: "<<random<<std::endl;
+
                 if(isEmpty[random])
                 {
-                    tiles.push_back(Tiles(0, 0));
-                    tiles[numberOfTiles].value = 2;
-                    tiles[numberOfTiles].position = random;
+                    tiles.push_back(Tile(136));
+                    tiles[numberOfTiles].setPosition(22+(random%4)*140, 127+(random/4)*140);
+                    tiles[numberOfTiles].value = random*random*10;
+                    tiles[numberOfTiles].updateTile();
 
-                    tilesText.push_back(sf::Text("0", fontPixel));
-
-                    isEmpty[random]=true;
+                    isEmpty[random]=false;
 
                     numberOfTiles++;
+                    std::cout<<numberOfTiles<<std::endl;
                 }
             }
         }
