@@ -8,6 +8,7 @@
 using namespace std;
 
 int numberOfTiles = 0;
+int whatIsInThisField[16];
 
 sf::Font fontPixel;
 
@@ -15,9 +16,12 @@ int main()
 {
     srand(time(NULL));
 
-    MainWindow window(600, 700, "2048:re");
+    for(int i = 0; i<16; i++)
+    {
+        whatIsInThisField[i]=99;
+    }
 
-    unsigned int currentTilesValues[16] = {0};
+    MainWindow window(600, 700, "2048:re");
 
     bool isEmpty[16];
     for(int i = 0; i<16; i++)
@@ -43,7 +47,7 @@ int main()
     while(window.isOpen())
     {
         sf::Event event;
-        window.handleEvent(event, currentTilesValues, tiles, isEmpty);
+        window.handleEvent(event, tiles, isEmpty);
 
         window.clear(sf::Color(255, 255, 220, 0));
         for(int i = 0; i<16; i++)
@@ -55,6 +59,13 @@ int main()
         {
             window.draw(tiles[i-1]);
             window.draw(tiles[i-1].textValue);
+        }
+        if(numberOfTiles==0)
+        {
+            sf::Text startText("Press 'W' to start.", fontPixel, 80);
+            startText.setFillColor(sf::Color::Black);
+            startText.setPosition(120, 0);
+            window.draw(startText);
         }
         window.display();
     }

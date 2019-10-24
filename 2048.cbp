@@ -48,13 +48,13 @@
 		</Linker>
 		<Unit filename="include/MainWindow.h" />
 		<Unit filename="include/Resources.h" />
+		<Unit filename="include/Tile.h" />
 		<Unit filename="include/TileField.h" />
-		<Unit filename="include/Tiles.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/MainWindow.cpp" />
 		<Unit filename="src/Resources.cpp" />
+		<Unit filename="src/Tile.cpp" />
 		<Unit filename="src/TileField.cpp" />
-		<Unit filename="src/Tiles.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
