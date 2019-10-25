@@ -75,8 +75,6 @@ void MainWindow::createNewTile(Tile tiles[16], bool isEmpty[16])
 
 void MainWindow::changeTilePosition(int offset, int position, Tile tiles[16], bool isEmpty[16])
 {
-    std::cout<<"Tile no."<<position<<": Trying to switch to poll #"<<position-offset<<std::endl;
-
     tiles[position-offset].value = tiles[position].value;
     tiles[position].value = 0;
 
@@ -127,6 +125,8 @@ void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
                             tiles[position-4].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position-4].value;
                         }
                         break;
 
@@ -141,6 +141,8 @@ void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
                             tiles[position-8].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position-8].value;
                         }
 
                         else if(isEmpty[position-4])
@@ -152,6 +154,8 @@ void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
                             tiles[position-4].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position-4].value;
                         }
                         break;
 
@@ -166,6 +170,8 @@ void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
                             tiles[position-12].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position-12].value;
                         }
 
                         else if(isEmpty[position-8]&&isEmpty[position-4])
@@ -178,6 +184,8 @@ void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
                             tiles[position-8].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position-8].value;
                         }
 
                         else if(isEmpty[position-4])
@@ -189,6 +197,8 @@ void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
                             tiles[position-4].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position-4].value;
                         }
                         break;
                     }
@@ -218,6 +228,8 @@ void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
                             tiles[position+12].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position+12].value;
                         }
 
                         else if(isEmpty[position+8]&&isEmpty[position+4])
@@ -230,6 +242,8 @@ void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
                             tiles[position+8].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position+8].value;
                         }
 
                         else if(isEmpty[position+4])
@@ -241,6 +255,8 @@ void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
                             tiles[position+4].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position+4].value;
                         }
                         break;
 
@@ -255,6 +271,8 @@ void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
                             tiles[position+8].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position+8].value;
                         }
 
                         else if(isEmpty[position+4])
@@ -266,6 +284,8 @@ void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
                             tiles[position+4].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position+4].value;
                         }
                         break;
 
@@ -279,6 +299,8 @@ void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
                             tiles[position+4].value*=2;
                             tiles[position].value=0;
                             isEmpty[position]=true;
+
+                            gameScore+=tiles[position+4].value;
                         }
                         break;
 
@@ -313,6 +335,8 @@ void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
                             tiles[position-1].value*=2;
                             tiles[position].value = 0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position-1].value;
                         }
                         break;
 
@@ -327,6 +351,8 @@ void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
                             tiles[position-2].value*=2;
                             tiles[position].value = 0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position-2].value;
                         }
 
                         else if(isEmpty[position-1])
@@ -338,6 +364,8 @@ void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
                             tiles[position-1].value*=2;
                             tiles[position].value = 0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position-1].value;
                         }
                         break;
 
@@ -352,6 +380,8 @@ void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
                             tiles[position-3].value*=2;
                             tiles[position].value = 0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position-3].value;
                         }
 
                         else if(isEmpty[position-2]&&isEmpty[position-1])
@@ -364,6 +394,8 @@ void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
                             tiles[position-2].value*=2;
                             tiles[position].value = 0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position-2].value;
                         }
 
                         else if(isEmpty[position-1])
@@ -375,6 +407,8 @@ void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
                             tiles[position-1].value*=2;
                             tiles[position].value = 0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position-1].value;
                         }
                         break;
                     }
@@ -404,6 +438,8 @@ void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
                             tiles[position+3].value*=2;
                             tiles[position].value=0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position+3].value;
                         }
 
                         else if(isEmpty[position+2]&&isEmpty[position+1])
@@ -416,6 +452,8 @@ void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
                             tiles[position+2].value*=2;
                             tiles[position].value=0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position+2].value;
                         }
 
                         else if(isEmpty[position+1])
@@ -427,6 +465,8 @@ void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
                             tiles[position+1].value*=2;
                             tiles[position].value=0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position+1].value;
                         }
                         break;
 
@@ -441,6 +481,8 @@ void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
                             tiles[position+2].value*=2;
                             tiles[position].value=0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position+2].value;
                         }
 
                         else if(isEmpty[position+1])
@@ -452,6 +494,8 @@ void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
                             tiles[position+1].value*=2;
                             tiles[position].value=0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position+1].value;
                         }
                         break;
 
@@ -465,6 +509,8 @@ void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
                             tiles[position+1].value*=2;
                             tiles[position].value=0;
                             isEmpty[position] = true;
+
+                            gameScore+=tiles[position+1].value;
                         }
                         break;
 
