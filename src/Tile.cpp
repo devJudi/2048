@@ -17,7 +17,7 @@ Tile::~Tile()
 
 void Tile::updateTile()
 {
-    this->setFillColor(sf::Color(255-value/10, 255-value*3, value, 255-value*5));
+    this->setFillColor(sf::Color(255-value/10, 255-value*8, value, 255-value*5));
     textValue.setString(std::to_string(value));
 
     if (value<10)

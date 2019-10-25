@@ -46,6 +46,12 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(4, position, tiles, isEmpty);
                         }
+                        else if(tiles[position-4].value==tiles[position].value)
+                        {
+                            tiles[position-4].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
                         break;
 
                     case 2:
@@ -53,9 +59,23 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(8, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position-4]&&
+                                tiles[position-8].value==tiles[position].value)
+                        {
+                            tiles[position-8].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
+
                         else if(isEmpty[position-4])
                         {
                             changeTilePosition(4, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position-4].value==tiles[position].value)
+                        {
+                            tiles[position-4].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
                         }
                         break;
 
@@ -64,19 +84,41 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(12, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position-8]&&isEmpty[position-4]&&
+                                tiles[position-12].value==tiles[position].value)
+                        {
+                            tiles[position-12].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
+
                         else if(isEmpty[position-8]&&isEmpty[position-4])
                         {
                             changeTilePosition(8, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position-4]&&
+                                tiles[position-8].value==tiles[position].value)
+                        {
+                            tiles[position-8].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
+
                         else if(isEmpty[position-4])
                         {
                             changeTilePosition(4, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position-4].value==tiles[position].value)
+                        {
+                            tiles[position-4].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
                         }
                         break;
                     }
                 }
 
-                //createNewTile(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
             }
             else if(event.key.code==sf::Keyboard::S||event.key.code==sf::Keyboard::Down)
             {
@@ -98,13 +140,35 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(-12, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position+8]&&isEmpty[position+4]&&
+                                tiles[position+12].value==tiles[position].value)
+                        {
+                            tiles[position+12].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
+
                         else if(isEmpty[position+8]&&isEmpty[position+4])
                         {
                             changeTilePosition(-8, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position+4]&&
+                                tiles[position+8].value==tiles[position].value)
+                        {
+                            tiles[position+8].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
+
                         else if(isEmpty[position+4])
                         {
                             changeTilePosition(-4, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position+4].value==tiles[position].value)
+                        {
+                            tiles[position+4].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
                         }
                         break;
 
@@ -113,9 +177,23 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(-8, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position+4]&&
+                                tiles[position+8].value==tiles[position].value)
+                        {
+                            tiles[position+8].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
+
                         else if(isEmpty[position+4])
                         {
                             changeTilePosition(-4, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position+4].value==tiles[position].value)
+                        {
+                            tiles[position+4].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
                         }
                         break;
 
@@ -124,6 +202,12 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(-4, position, tiles, isEmpty);
                         }
+                        else if(tiles[position+4].value==tiles[position].value)
+                        {
+                            tiles[position+4].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position]=true;
+                        }
                         break;
 
                     case 3:
@@ -131,7 +215,7 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                     }
                 }
 
-                //createNewTile(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
             }
             else if(event.key.code==sf::Keyboard::A||event.key.code==sf::Keyboard::Left)
             {
@@ -156,6 +240,12 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(1, position, tiles, isEmpty);
                         }
+                        else if(tiles[position-1].value==tiles[position].value)
+                        {
+                            tiles[position-1].value*=2;
+                            tiles[position].value = 0;
+                            isEmpty[position] = true;
+                        }
                         break;
 
                     case 2:
@@ -163,9 +253,23 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(2, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position-1]&&
+                                tiles[position-2].value==tiles[position].value)
+                        {
+                            tiles[position-2].value*=2;
+                            tiles[position].value = 0;
+                            isEmpty[position] = true;
+                        }
+
                         else if(isEmpty[position-1])
                         {
                             changeTilePosition(1, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position-1].value==tiles[position].value)
+                        {
+                            tiles[position-1].value*=2;
+                            tiles[position].value = 0;
+                            isEmpty[position] = true;
                         }
                         break;
 
@@ -174,19 +278,41 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(3, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position-2]&&isEmpty[position-1]&&
+                                tiles[position-3].value==tiles[position].value)
+                        {
+                            tiles[position-3].value*=2;
+                            tiles[position].value = 0;
+                            isEmpty[position] = true;
+                        }
+
                         else if(isEmpty[position-2]&&isEmpty[position-1])
                         {
                             changeTilePosition(2, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position-1]&&
+                                tiles[position-2].value==tiles[position].value)
+                        {
+                            tiles[position-2].value*=2;
+                            tiles[position].value = 0;
+                            isEmpty[position] = true;
+                        }
+
                         else if(isEmpty[position-1])
                         {
                             changeTilePosition(1, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position-1].value==tiles[position].value)
+                        {
+                            tiles[position-1].value*=2;
+                            tiles[position].value = 0;
+                            isEmpty[position] = true;
                         }
                         break;
                     }
                 }
 
-                //createNewTile(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
             }
             else if(event.key.code==sf::Keyboard::D||event.key.code==sf::Keyboard::Right)
             {
@@ -208,13 +334,35 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(-3, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position+2]&&isEmpty[position+1]&&
+                                tiles[position+3].value==tiles[position].value)
+                        {
+                            tiles[position+3].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position] = true;
+                        }
+
                         else if(isEmpty[position+2]&&isEmpty[position+1])
                         {
                             changeTilePosition(-2, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position+1]&&
+                                tiles[position+2].value==tiles[position].value)
+                        {
+                            tiles[position+2].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position] = true;
+                        }
+
                         else if(isEmpty[position+1])
                         {
                             changeTilePosition(-1, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position+1].value==tiles[position].value)
+                        {
+                            tiles[position+1].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position] = true;
                         }
                         break;
 
@@ -223,9 +371,23 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(-2, position, tiles, isEmpty);
                         }
+                        else if(isEmpty[position+1]&&
+                                tiles[position+2].value==tiles[position].value)
+                        {
+                            tiles[position+2].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position] = true;
+                        }
+
                         else if(isEmpty[position+1])
                         {
                             changeTilePosition(-1, position, tiles, isEmpty);
+                        }
+                        else if(tiles[position+1].value==tiles[position].value)
+                        {
+                            tiles[position+1].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position] = true;
                         }
                         break;
 
@@ -234,13 +396,19 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         {
                             changeTilePosition(-1, position, tiles, isEmpty);
                         }
+                        else if(tiles[position+1].value==tiles[position].value)
+                        {
+                            tiles[position+1].value*=2;
+                            tiles[position].value=0;
+                            isEmpty[position] = true;
+                        }
                         break;
 
                     case 3:
                         break;
                     }
                 }
-                //createNewTile(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
             }
         }
         if(event.type==sf::Event::MouseButtonPressed)
