@@ -11,6 +11,7 @@ std::vector <int> usedTileFields;
 
 int whatIsInThisField[16];
 int colorMod;
+long long int gameScore = 10000000;
 
 bool isGameStarted = false;
 
@@ -78,6 +79,18 @@ int main()
             startText.setFillColor(sf::Color::Black);
             startText.setPosition(120, 0);
             window.draw(startText);
+        }
+        else
+        {
+            sf::Text scoreText("Score: ", fontPixel, 80);
+            scoreText.setFillColor(sf::Color::Black);
+            scoreText.setPosition(20, 0);
+            window.draw(scoreText);
+
+            sf::Text currentScoreText(std::to_string(gameScore), fontPixel, 80);
+            currentScoreText.setFillColor(sf::Color::Black);
+            currentScoreText.setPosition(160, 0);
+            window.draw(currentScoreText);
         }
         window.display();
     }
