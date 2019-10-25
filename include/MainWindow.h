@@ -7,7 +7,9 @@
 #include <iostream>
 #include <Tile.h>
 
+extern std::vector <int> usedTileFields;
 extern int whatIsInThisField[16];
+extern bool isGameStarted;
 
 class MainWindow : public sf::RenderWindow
 {
@@ -16,6 +18,12 @@ class MainWindow : public sf::RenderWindow
         void handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16]);
         void createNewTile(Tile tiles[16], bool isEmpty[16]);
         void changeTilePosition(int offset, int position, Tile tiles[16], bool isEmpty[16]);
+
+        void setUpUsedVector(bool isReversed, bool isEmpty[16]);
+        void moveTileUp(Tile tiles[16], bool isEmpty[16]);
+        void moveTileDown(Tile tiles[16], bool isEmpty[16]);
+        void moveTileLeft(Tile tiles[16], bool isEmpty[16]);
+        void moveTileRight(Tile tiles[16], bool isEmpty[16]);
 
         virtual ~MainWindow();
 

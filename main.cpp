@@ -7,13 +7,19 @@
 
 using namespace std;
 
+std::vector <int> usedTileFields;
+
 int whatIsInThisField[16];
+int colorMod;
+
+bool isGameStarted = false;
 
 sf::Font fontPixel;
 
 int main()
 {
     srand(time(NULL));
+    colorMod=rand()%40+20;
 
     for(int i = 0; i<16; i++)
     {
@@ -66,13 +72,13 @@ int main()
             }
 
         }
-        /*if(numberOfTiles==0)
+        if(!isGameStarted)
         {
-            sf::Text startText("Press 'W' to start.", fontPixel, 80);
+            sf::Text startText("Press 'C' to start.", fontPixel, 80);
             startText.setFillColor(sf::Color::Black);
             startText.setPosition(120, 0);
             window.draw(startText);
-        }*/
+        }
         window.display();
     }
     return 0;

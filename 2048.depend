@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1571996993 source:c:\users\jonas\desktop\projekty\github\2048\main.cpp
+1572020793 source:c:\users\jonas\desktop\projekty\github\2048\main.cpp
 	<iostream>
 	<vector>
 	"MainWindow.h"
@@ -7,10 +7,10 @@
 	"Tile.h"
 	"Resources.h"
 
-1572000596 source:c:\users\jonas\desktop\projekty\github\2048\src\mainwindow.cpp
+1572021035 source:c:\users\jonas\desktop\projekty\github\2048\src\mainwindow.cpp
 	"MainWindow.h"
 
-1571996966 c:\users\jonas\desktop\projekty\github\2048\include\mainwindow.h
+1572020843 c:\users\jonas\desktop\projekty\github\2048\include\mainwindow.h
 	<SFML/Graphics.hpp>
 	<vector>
 	<cstdlib>
@@ -447,9 +447,9 @@
 1571587745 source:c:\users\jonas\desktop\projekty\github\2048\src\resources.cpp
 	"Resources.h"
 
-1571999682 source:c:\users\jonas\desktop\projekty\github\2048\src\tile.cpp
+1572019475 source:c:\users\jonas\desktop\projekty\github\2048\src\tile.cpp
 	"Tile.h"
 
-1571995673 c:\users\jonas\desktop\projekty\github\2048\include\tile.h
+1572018850 c:\users\jonas\desktop\projekty\github\2048\include\tile.h
 	<SFML/Graphics.hpp>
 

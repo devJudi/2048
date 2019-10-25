@@ -22,16 +22,92 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
             else if(event.key.code==sf::Keyboard::C)
             {
                 createNewTile(tiles, isEmpty);
+                isGameStarted = true;
             }
             else if(event.key.code==sf::Keyboard::W||event.key.code==sf::Keyboard::Up)
             {
-                std::vector <int> usedTileFields;
-                for(int i = 0; i<16; i++)
-                {
-                    if(!isEmpty[i])
-                        usedTileFields.push_back(i);
-                }
-                int position = 0;
+                moveTileUp(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
+            }
+            else if(event.key.code==sf::Keyboard::S||event.key.code==sf::Keyboard::Down)
+            {
+                moveTileDown(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
+            }
+            else if(event.key.code==sf::Keyboard::A||event.key.code==sf::Keyboard::Left)
+            {
+                moveTileLeft(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
+            }
+            else if(event.key.code==sf::Keyboard::D||event.key.code==sf::Keyboard::Right)
+            {
+                moveTileRight(tiles, isEmpty);
+                createNewTile(tiles, isEmpty);
+            }
+        }
+        if(event.type==sf::Event::MouseButtonPressed)
+        {
+
+        }
+    }
+}
+
+void MainWindow::createNewTile(Tile tiles[16], bool isEmpty[16])
+{
+    std::vector <int> emptyTileFields;
+    for(int i = 0; i<16; i++)
+    {
+        if(isEmpty[i])
+            emptyTileFields.push_back(i);
+    }
+
+    if(!emptyTileFields.empty())
+    {
+        int random = rand()%emptyTileFields.size();
+
+        if(isEmpty[emptyTileFields[random]])
+        {
+            tiles[emptyTileFields[random]].value = 2;
+            isEmpty[emptyTileFields[random]]=false;
+        }
+    }
+}
+
+void MainWindow::changeTilePosition(int offset, int position, Tile tiles[16], bool isEmpty[16])
+{
+    std::cout<<"Tile no."<<position<<": Trying to switch to poll #"<<position-offset<<std::endl;
+
+    tiles[position-offset].value = tiles[position].value;
+    tiles[position].value = 0;
+
+    isEmpty[position-offset] = false;
+    isEmpty[position] = true;
+}
+
+void MainWindow::setUpUsedVector(bool isReversed, bool isEmpty[16])
+{
+    if(!isReversed)
+    {
+        for(int i = 0; i<16; i++)
+        {
+            if(!isEmpty[i])
+                usedTileFields.push_back(i);
+        }
+    }
+    else
+    {
+        for(int i = 15; i>=0; i--)
+        {
+            if(!isEmpty[i])
+                usedTileFields.push_back(i);
+        }
+    }
+}
+
+void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
+{
+    setUpUsedVector(false, isEmpty);
+    int position = 0;
 
                 for(unsigned int i = 0; i<usedTileFields.size(); i++)
                 {
@@ -117,18 +193,14 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         break;
                     }
                 }
+                usedTileFields.clear();
 
-                createNewTile(tiles, isEmpty);
-            }
-            else if(event.key.code==sf::Keyboard::S||event.key.code==sf::Keyboard::Down)
-            {
-                std::vector <int> usedTileFields;
-                for(int i = 15; i>=0; i--)
-                {
-                    if(!isEmpty[i])
-                        usedTileFields.push_back(i);
-                }
-                int position = 0;
+}
+
+void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
+{
+    setUpUsedVector(true, isEmpty);
+    int position = 0;
 
                 for(unsigned int i = 0; i<usedTileFields.size(); i++)
                 {
@@ -214,18 +286,14 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         break;
                     }
                 }
+                usedTileFields.clear();
 
-                createNewTile(tiles, isEmpty);
-            }
-            else if(event.key.code==sf::Keyboard::A||event.key.code==sf::Keyboard::Left)
-            {
-                std::vector <int> usedTileFields;
-                for(int i = 0; i<16; i++)
-                {
-                    if(!isEmpty[i])
-                        usedTileFields.push_back(i);
-                }
-                int position = 0;
+}
+
+void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
+{
+    setUpUsedVector(false, isEmpty);
+    int position = 0;
 
                 for(unsigned int i = 0; i<usedTileFields.size(); i++)
                 {
@@ -311,18 +379,14 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         break;
                     }
                 }
+                usedTileFields.clear();
 
-                createNewTile(tiles, isEmpty);
-            }
-            else if(event.key.code==sf::Keyboard::D||event.key.code==sf::Keyboard::Right)
-            {
-                std::vector <int> usedTileFields;
-                for(int i = 15; i>=0; i--)
-                {
-                    if(!isEmpty[i])
-                        usedTileFields.push_back(i);
-                }
-                int position = 0;
+}
+
+void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
+{
+    setUpUsedVector(true, isEmpty);
+    int position = 0;
 
                 for(unsigned int i = 0; i<usedTileFields.size(); i++)
                 {
@@ -408,47 +472,9 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                         break;
                     }
                 }
-                createNewTile(tiles, isEmpty);
-            }
-        }
-        if(event.type==sf::Event::MouseButtonPressed)
-        {
-
-        }
-    }
+            usedTileFields.clear();
 }
 
-void MainWindow::createNewTile(Tile tiles[16], bool isEmpty[16])
-{
-    std::vector <int> emptyTileFields;
-    for(int i = 0; i<16; i++)
-    {
-        if(isEmpty[i])
-            emptyTileFields.push_back(i);
-    }
-
-    if(!emptyTileFields.empty())
-    {
-        int random = rand()%emptyTileFields.size();
-
-        if(isEmpty[emptyTileFields[random]])
-        {
-            tiles[emptyTileFields[random]].value = 2;
-            isEmpty[emptyTileFields[random]]=false;
-        }
-    }
-}
-
-void MainWindow::changeTilePosition(int offset, int position, Tile tiles[16], bool isEmpty[16])
-{
-    std::cout<<"Tile no."<<position<<": Trying to switch to poll #"<<position-offset<<std::endl;
-
-    tiles[position-offset].value = tiles[position].value;
-    tiles[position].value = 0;
-
-    isEmpty[position-offset] = false;
-    isEmpty[position] = true;
-}
 
 MainWindow::~MainWindow()
 {

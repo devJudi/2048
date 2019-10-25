@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 extern sf::Font fontPixel;
+extern int colorMod;
 
 class Tile : public sf::RectangleShape
 {
