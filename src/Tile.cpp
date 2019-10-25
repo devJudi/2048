@@ -1,8 +1,8 @@
 #include "Tile.h"
 
-Tile::Tile(int x)
+Tile::Tile()
 {
-    this->setSize(sf::Vector2f(x, x));
+    this->setSize(sf::Vector2f(136, 136));
     this->setFillColor(sf::Color::Green);
 
     textValue.setCharacterSize(60);

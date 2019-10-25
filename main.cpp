@@ -7,7 +7,6 @@
 
 using namespace std;
 
-int numberOfTiles = 0;
 int whatIsInThisField[16];
 
 sf::Font fontPixel;
@@ -29,13 +28,14 @@ int main()
         isEmpty[i] = true;
     }
 
-    std::vector <Tile> tiles;
+    Tile tiles[16];
     Resources::loadFonts();
 
     TileField tileFields[16];
     for(int i = 0; i<16; i++)
     {
         tileFields[i].setPosition(20+(i%4)*140, 125+(i/4)*140);
+        tiles[i].setPosition(22+(i%4)*140, 127+(i/4)*140);
     }
     TileField scoreField;
     scoreField.setSize(sf::Vector2f(580, 100));
@@ -55,18 +55,24 @@ int main()
             window.draw(tileFields[i]);
         }
         window.draw(scoreField);
-        for(int i = numberOfTiles; i>0; i--)
+        for(int i = 0; i<16; i++)
         {
-            window.draw(tiles[i-1]);
-            window.draw(tiles[i-1].textValue);
+            if(!isEmpty[i]&&tiles[i].value>0)
+            {
+                tiles[i].updateTile();
+
+                window.draw(tiles[i]);
+                window.draw(tiles[i].textValue);
+            }
+
         }
-        if(numberOfTiles==0)
+        /*if(numberOfTiles==0)
         {
             sf::Text startText("Press 'W' to start.", fontPixel, 80);
             startText.setFillColor(sf::Color::Black);
             startText.setPosition(120, 0);
             window.draw(startText);
-        }
+        }*/
         window.display();
     }
     return 0;

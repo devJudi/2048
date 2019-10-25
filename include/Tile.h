@@ -8,7 +8,7 @@ extern sf::Font fontPixel;
 class Tile : public sf::RectangleShape
 {
     public:
-        Tile(int x);
+        Tile();
         virtual ~Tile();
         void updateTile();
 

@@ -5,7 +5,7 @@ MainWindow::MainWindow(int x, int y, std::string name)
     this->create(sf::VideoMode(x, y), name);
 }
 
-void MainWindow::handleEvent(sf::Event event, std::vector <Tile> &tiles, bool isEmpty[16])
+void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
 {
     while(this->pollEvent(event))
     {
@@ -18,6 +18,10 @@ void MainWindow::handleEvent(sf::Event event, std::vector <Tile> &tiles, bool is
             if(event.key.code==sf::Keyboard::Escape)
             {
                 this->close();
+            }
+            else if(event.key.code==sf::Keyboard::C)
+            {
+                createNewTile(tiles, isEmpty);
             }
             else if(event.key.code==sf::Keyboard::W||event.key.code==sf::Keyboard::Up)
             {
@@ -72,12 +76,12 @@ void MainWindow::handleEvent(sf::Event event, std::vector <Tile> &tiles, bool is
                     }
                 }
 
-                createNewTile(tiles, isEmpty);
+                //createNewTile(tiles, isEmpty);
             }
             else if(event.key.code==sf::Keyboard::S||event.key.code==sf::Keyboard::Down)
             {
                 std::vector <int> usedTileFields;
-                for(int i = 0; i<16; i++)
+                for(int i = 15; i>=0; i--)
                 {
                     if(!isEmpty[i])
                         usedTileFields.push_back(i);
@@ -127,7 +131,7 @@ void MainWindow::handleEvent(sf::Event event, std::vector <Tile> &tiles, bool is
                     }
                 }
 
-                createNewTile(tiles, isEmpty);
+                //createNewTile(tiles, isEmpty);
             }
             else if(event.key.code==sf::Keyboard::A||event.key.code==sf::Keyboard::Left)
             {
@@ -182,12 +186,12 @@ void MainWindow::handleEvent(sf::Event event, std::vector <Tile> &tiles, bool is
                     }
                 }
 
-                createNewTile(tiles, isEmpty);
+                //createNewTile(tiles, isEmpty);
             }
             else if(event.key.code==sf::Keyboard::D||event.key.code==sf::Keyboard::Right)
             {
                 std::vector <int> usedTileFields;
-                for(int i = 0; i<16; i++)
+                for(int i = 15; i>=0; i--)
                 {
                     if(!isEmpty[i])
                         usedTileFields.push_back(i);
@@ -236,7 +240,7 @@ void MainWindow::handleEvent(sf::Event event, std::vector <Tile> &tiles, bool is
                         break;
                     }
                 }
-                createNewTile(tiles, isEmpty);
+                //createNewTile(tiles, isEmpty);
             }
         }
         if(event.type==sf::Event::MouseButtonPressed)
@@ -246,7 +250,7 @@ void MainWindow::handleEvent(sf::Event event, std::vector <Tile> &tiles, bool is
     }
 }
 
-void MainWindow::createNewTile(std::vector <Tile> &tiles, bool isEmpty[16])
+void MainWindow::createNewTile(Tile tiles[16], bool isEmpty[16])
 {
     std::vector <int> emptyTileFields;
     for(int i = 0; i<16; i++)
@@ -261,30 +265,18 @@ void MainWindow::createNewTile(std::vector <Tile> &tiles, bool isEmpty[16])
 
         if(isEmpty[emptyTileFields[random]])
         {
-            tiles.push_back(Tile(136));
-            tiles[numberOfTiles].setPosition(22+(emptyTileFields[random]%4)*140,
-                                             127+(emptyTileFields[random]/4)*140);
-            tiles[numberOfTiles].value = 2;
-            tiles[numberOfTiles].updateTile();
-
+            tiles[emptyTileFields[random]].value = 2;
             isEmpty[emptyTileFields[random]]=false;
-
-            whatIsInThisField[emptyTileFields[random]] = numberOfTiles;
-
-            numberOfTiles++;
         }
     }
 }
 
-void MainWindow::changeTilePosition(int offset, int position, std::vector <Tile> &tiles, bool isEmpty[16])
+void MainWindow::changeTilePosition(int offset, int position, Tile tiles[16], bool isEmpty[16])
 {
     std::cout<<"Tile no."<<position<<": Trying to switch to poll #"<<position-offset<<std::endl;
-    tiles[whatIsInThisField[position]].setPosition(22+((position-offset)%4)*140,
-            127+((position-offset)/4)*140);
-    tiles[whatIsInThisField[position]].updateTile();
 
-    whatIsInThisField[position-offset] = whatIsInThisField[position];
-    whatIsInThisField[position] = 99;
+    tiles[position-offset].value = tiles[position].value;
+    tiles[position].value = 0;
 
     isEmpty[position-offset] = false;
     isEmpty[position] = true;
