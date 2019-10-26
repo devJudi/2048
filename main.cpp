@@ -11,7 +11,7 @@ std::vector <int> usedTileFields;
 
 int whatIsInThisField[16];
 int colorMod;
-long long int gameScore = 10000000;
+long long int gameScore = 0;
 
 bool isGameStarted = false;
 
@@ -20,7 +20,7 @@ sf::Font fontPixel;
 int main()
 {
     srand(time(NULL));
-    colorMod=rand()%40+20;
+    colorMod=(rand()%10+1);
 
     for(int i = 0; i<16; i++)
     {
@@ -77,19 +77,19 @@ int main()
         {
             sf::Text startText("Press 'C' to start.", fontPixel, 80);
             startText.setFillColor(sf::Color::Black);
-            startText.setPosition(120, 0);
+            startText.setPosition(120, 5);
             window.draw(startText);
         }
         else
         {
             sf::Text scoreText("Score: ", fontPixel, 80);
             scoreText.setFillColor(sf::Color::Black);
-            scoreText.setPosition(20, 0);
+            scoreText.setPosition(20, 5);
             window.draw(scoreText);
 
             sf::Text currentScoreText(std::to_string(gameScore), fontPixel, 80);
             currentScoreText.setFillColor(sf::Color::Black);
-            currentScoreText.setPosition(160, 0);
+            currentScoreText.setPosition(160, 7);
             window.draw(currentScoreText);
         }
         window.display();
