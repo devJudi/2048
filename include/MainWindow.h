@@ -8,8 +8,8 @@
 #include <Tile.h>
 
 extern std::vector <int> usedTileFields;
-extern int whatIsInThisField[16];
 extern long long int gameScore;
+extern long long int bestGameScore;
 extern bool isGameStarted;
 
 class MainWindow : public sf::RenderWindow
@@ -19,6 +19,7 @@ class MainWindow : public sf::RenderWindow
         void handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16]);
         void createNewTile(Tile tiles[16], bool isEmpty[16]);
         void changeTilePosition(int offset, int position, Tile tiles[16], bool isEmpty[16]);
+        bool isGameOver(Tile tiles[16], bool isEmpty[16]);
 
         void setUpUsedVector(bool isReversed, bool isEmpty[16]);
         void moveTileUp(Tile tiles[16], bool isEmpty[16]);
@@ -27,6 +28,8 @@ class MainWindow : public sf::RenderWindow
         void moveTileRight(Tile tiles[16], bool isEmpty[16]);
 
         virtual ~MainWindow();
+
+        bool gameOver;
 
     protected:
 

@@ -8,6 +8,7 @@ class TileField     :public sf::RectangleShape
 {
     public:
         TileField();
+        void customizeTileField();
         virtual ~TileField();
 
         inline int getX() {return x;};
