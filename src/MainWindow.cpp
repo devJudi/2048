@@ -42,6 +42,22 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                     moveTileRight(tiles, isEmpty);
                     createNewTile(tiles, isEmpty);
                 }
+                if(gameOver)
+                {
+                    if(event.key.code==sf::Keyboard::C)
+                    {
+                        bestGameScore = gameScore;
+                        gameScore = 0;
+
+                        for(int i = 0; i<16; i++)
+                        {
+                            tiles[i].value = 0;
+                            isEmpty[i] = true;
+
+                        }
+                        gameOver = false;
+                    }
+                }
             }
             else
             {
@@ -91,7 +107,8 @@ void MainWindow::changeTilePosition(int offset, int position, Tile tiles[16], bo
 
 bool MainWindow::isGameOver(Tile tiles[16], bool isEmpty[16])
 {
-    if(usedTileFields.size()<16) return false;
+    if(usedTileFields.size()<16)
+        return false;
 
     for(int i = 0; i<3; i++)
     {
@@ -102,17 +119,18 @@ bool MainWindow::isGameOver(Tile tiles[16], bool isEmpty[16])
                 tiles[2+i*4].value!=tiles[3+i*4].value&&
                 tiles[2+i*4].value!=tiles[6+i*4].value&&
                 tiles[3+i*4].value!=tiles[7+i*4].value))
-        return false;
+            return false;
     }
     if(tiles[12].value!=tiles[13].value&&
-              tiles[13].value!=tiles[14].value&&
-              tiles[14].value!=tiles[15].value)
+            tiles[13].value!=tiles[14].value&&
+            tiles[14].value!=tiles[15].value)
     {
         this->gameOver = true;
         return true;
     }
 
-    else return false;
+    else
+        return false;
 }
 
 

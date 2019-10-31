@@ -9,6 +9,7 @@
 
 extern std::vector <int> usedTileFields;
 extern long long int gameScore;
+extern long long int bestGameScore;
 extern bool isGameStarted;
 
 class MainWindow : public sf::RenderWindow
