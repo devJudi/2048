@@ -86,6 +86,19 @@ int main()
             currentScoreText.setPosition(160, 7);
             window.draw(currentScoreText);
         }
+
+        if(window.gameOver)
+        {
+            sf::RectangleShape gameOverScreen(sf::Vector2f(600, 300));
+            gameOverScreen.setFillColor(sf::Color(255, 0, 50, 120));
+            gameOverScreen.setPosition(0, 200);
+            window.draw(gameOverScreen);
+
+            sf::Text gameOvertText("GAME OVER", fontPixel, 140);
+            gameOvertText.setFillColor(sf::Color::Black);
+            gameOvertText.setPosition(120, 250);
+            window.draw(gameOvertText);
+        }
         window.display();
     }
     return 0;

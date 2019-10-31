@@ -3,6 +3,7 @@
 MainWindow::MainWindow(int x, int y, std::string name)
 {
     this->create(sf::VideoMode(x, y), name);
+    this->gameOver = false;
 }
 
 void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
@@ -88,6 +89,33 @@ void MainWindow::changeTilePosition(int offset, int position, Tile tiles[16], bo
     isEmpty[position] = true;
 }
 
+bool MainWindow::isGameOver(Tile tiles[16], bool isEmpty[16])
+{
+    if(usedTileFields.size()<16) return false;
+
+    for(int i = 0; i<3; i++)
+    {
+        if (!(tiles[0+i*4].value!=tiles[1+i*4].value&&
+                tiles[0+i*4].value!=tiles[4+i*4].value&&
+                tiles[1+i*4].value!=tiles[2+i*4].value&&
+                tiles[1+i*4].value!=tiles[5+i*4].value&&
+                tiles[2+i*4].value!=tiles[3+i*4].value&&
+                tiles[2+i*4].value!=tiles[6+i*4].value&&
+                tiles[3+i*4].value!=tiles[7+i*4].value))
+        return false;
+    }
+    if(tiles[12].value!=tiles[13].value&&
+              tiles[13].value!=tiles[14].value&&
+              tiles[14].value!=tiles[15].value)
+    {
+        this->gameOver = true;
+        return true;
+    }
+
+    else return false;
+}
+
+
 void MainWindow::setUpUsedVector(bool isReversed, bool isEmpty[16])
 {
     if(!isReversed)
@@ -108,14 +136,10 @@ void MainWindow::setUpUsedVector(bool isReversed, bool isEmpty[16])
     }
 }
 
-bool isGameOver()
-{
-    return false;
-}
-
 void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
 {
     setUpUsedVector(false, isEmpty);
+    isGameOver(tiles, isEmpty);
     int position = 0;
 
     for(unsigned int i = 0; i<usedTileFields.size(); i++)
@@ -212,15 +236,16 @@ void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
                 gameScore+=tiles[position-4].value;
             }
             break;
+
         }
     }
     usedTileFields.clear();
-
 }
 
 void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
 {
     setUpUsedVector(true, isEmpty);
+    isGameOver(tiles, isEmpty);
     int position = 0;
 
     for(unsigned int i = 0; i<usedTileFields.size(); i++)
@@ -326,6 +351,7 @@ void MainWindow::moveTileDown(Tile tiles[16], bool isEmpty[16])
 void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
 {
     setUpUsedVector(false, isEmpty);
+    isGameOver(tiles, isEmpty);
     int position = 0;
 
     for(unsigned int i = 0; i<usedTileFields.size(); i++)
@@ -431,6 +457,7 @@ void MainWindow::moveTileLeft(Tile tiles[16], bool isEmpty[16])
 void MainWindow::moveTileRight(Tile tiles[16], bool isEmpty[16])
 {
     setUpUsedVector(true, isEmpty);
+    isGameOver(tiles, isEmpty);
     int position = 0;
 
     for(unsigned int i = 0; i<usedTileFields.size(); i++)
