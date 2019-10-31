@@ -9,7 +9,6 @@ using namespace std;
 
 std::vector <int> usedTileFields;
 
-int whatIsInThisField[16];
 int colorMod;
 long long int gameScore = 0;
 
@@ -22,12 +21,7 @@ int main()
     srand(time(NULL));
     colorMod=(rand()%10+1);
 
-    for(int i = 0; i<16; i++)
-    {
-        whatIsInThisField[i]=99;
-    }
-
-    MainWindow window(600, 700, "2048:re");
+    Resources::loadFonts();
 
     bool isEmpty[16];
     for(int i = 0; i<16; i++)
@@ -36,8 +30,6 @@ int main()
     }
 
     Tile tiles[16];
-    Resources::loadFonts();
-
     TileField tileFields[16];
     for(int i = 0; i<16; i++)
     {
@@ -50,6 +42,8 @@ int main()
     scoreField.setOutlineThickness(0);
     scoreField.setOutlineColor(sf::Color::Green);
     scoreField.setFillColor(sf::Color(255, 255, 180, 255));
+
+    MainWindow window(600, 700, "2048:re");
 
     while(window.isOpen())
     {

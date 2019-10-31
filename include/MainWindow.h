@@ -8,7 +8,6 @@
 #include <Tile.h>
 
 extern std::vector <int> usedTileFields;
-extern int whatIsInThisField[16];
 extern long long int gameScore;
 extern bool isGameStarted;
 

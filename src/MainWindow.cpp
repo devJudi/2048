@@ -19,11 +19,6 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
             {
                 this->close();
             }
-            else if(event.key.code==sf::Keyboard::C)
-            {
-                createNewTile(tiles, isEmpty);
-                isGameStarted = true;
-            }
             if(isGameStarted)
             {
                 if(event.key.code==sf::Keyboard::W||event.key.code==sf::Keyboard::Up)
@@ -45,6 +40,14 @@ void MainWindow::handleEvent(sf::Event event, Tile tiles[16], bool isEmpty[16])
                 {
                     moveTileRight(tiles, isEmpty);
                     createNewTile(tiles, isEmpty);
+                }
+            }
+            else
+            {
+                if(event.key.code==sf::Keyboard::C)
+                {
+                    createNewTile(tiles, isEmpty);
+                    isGameStarted = true;
                 }
             }
         }
@@ -103,6 +106,11 @@ void MainWindow::setUpUsedVector(bool isReversed, bool isEmpty[16])
                 usedTileFields.push_back(i);
         }
     }
+}
+
+bool isGameOver()
+{
+    return false;
 }
 
 void MainWindow::moveTileUp(Tile tiles[16], bool isEmpty[16])
