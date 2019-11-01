@@ -20,7 +20,7 @@ sf::Font fontPixel;
 int main()
 {
     srand(time(NULL));
-    colorMod=(rand()%10+1);
+    colorMod=(rand()%10+1)*3;
 
     Resources::loadFonts();
 

@@ -90,7 +90,10 @@ void MainWindow::createNewTile(Tile tiles[16], bool isEmpty[16])
 
         if(isEmpty[emptyTileFields[random]])
         {
-            tiles[emptyTileFields[random]].value = 2;
+            int r = 0;
+            if(rand()%5==0) r = 4;
+            else r = 2;
+            tiles[emptyTileFields[random]].value = r;
             isEmpty[emptyTileFields[random]]=false;
         }
     }
